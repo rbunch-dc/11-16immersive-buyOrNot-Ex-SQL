@@ -1,0 +1,20 @@
+doctype html
+html
+	head
+		title= title
+		link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css")
+		link(src="//cdnjs.cloudflare.com/ajax/libs/tether/1.3.1/js/tether.min.js")
+		link(rel='stylesheet', href='/stylesheets/styles.css')
+		script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js")
+		script(src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js")
+	body
+		div.container-fluid
+			div.row.menu
+				a.col-sm-6(href="/")
+					div.vote-tab.text-center
+						h2 Vote Here
+				a.col-sm-6(href="/standings")
+					div.standings-tab.text-center
+						h2 Standings
+		div.container
+			block content

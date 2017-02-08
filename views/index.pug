@@ -1,0 +1,16 @@
+extends layout
+
+block content
+	div.row.text-center
+		div.col-sm-12.text-center.title
+			h1.text-center= title
+			p.text-center Vote to see what is the coolest!
+		div.col-sm-8.vote-box
+			div.col-sm-12.text-center.img-box
+				img(class="img-card" src=""+imageToRender+"" alt="cars")
+			div.col-sm-6.text-center.btn-box
+				a.text-center(href="/vote/cool/"+imageID)
+					input(type="button" class="btn btn-lg btn-success" value="Cool")
+				a.text-center(href="/vote/lame/"+imageID)
+					input(type="button" class="btn btn-lg btn-danger" value="Lame")
+

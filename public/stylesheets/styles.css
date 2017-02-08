@@ -1,0 +1,89 @@
+/* line 5, ../../compass/sass/layout/_layout.scss */
+body, html {
+  background-color: #ededed;
+}
+
+/* line 9, ../../compass/sass/layout/_layout.scss */
+.menu {
+  width: 100vw;
+  height: 60px;
+}
+/* line 12, ../../compass/sass/layout/_layout.scss */
+.menu a {
+  margin: 0;
+  padding: 0;
+  color: #ededed;
+  line-height: 60px;
+}
+/* line 17, ../../compass/sass/layout/_layout.scss */
+.menu a:hover {
+  text-decoration: none;
+  color: #fff;
+}
+/* line 22, ../../compass/sass/layout/_layout.scss */
+.menu .vote-tab {
+  background-image: url(/images/carbonFiber.jpg);
+  background-position: center;
+  background-size: 100%;
+  margin: auto 0px;
+  line-height: 60px;
+  height: 60px;
+}
+/* line 29, ../../compass/sass/layout/_layout.scss */
+.menu .vote-tab h2 {
+  line-height: 60px;
+}
+/* line 33, ../../compass/sass/layout/_layout.scss */
+.menu .standings-tab {
+  background-image: url(/images/metal.jpg);
+  background-position: center;
+  background-size: 100%;
+  margin: auto 0px;
+  line-height: 60px;
+  height: 60px;
+}
+/* line 40, ../../compass/sass/layout/_layout.scss */
+.menu .standings-tab h2 {
+  line-height: 60px;
+}
+
+/* line 46, ../../compass/sass/layout/_layout.scss */
+.container {
+  width: 80vw;
+  height: 90vh;
+  margin: auto;
+  background-color: #fff;
+}
+
+/* line 7, ../../compass/sass/views/_home.scss */
+.container .row {
+  margin: auto;
+}
+/* line 9, ../../compass/sass/views/_home.scss */
+.container .row .title {
+  margin: 20px auto;
+}
+/* line 12, ../../compass/sass/views/_home.scss */
+.container .row .vote-box {
+  height: 500px;
+  margin: auto;
+}
+/* line 15, ../../compass/sass/views/_home.scss */
+.container .row .vote-box .img-box {
+  height: 100%;
+  margin: 10px auto;
+  overflow: hidden;
+}
+/* line 19, ../../compass/sass/views/_home.scss */
+.container .row .vote-box .img-box .img-card {
+  width: 100%;
+}
+/* line 23, ../../compass/sass/views/_home.scss */
+.container .row .vote-box .btn-box {
+  height: auto;
+  margin: auto;
+}
+/* line 26, ../../compass/sass/views/_home.scss */
+.container .row .vote-box .btn-box input {
+  margin: 10px 20px;
+}
