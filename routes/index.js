@@ -35,8 +35,17 @@ router.get('/vote/:voteDirection/:imageID', (req, res, next)=>{
 	// res.json(req.params.imageID);
 	var imageID = req.params.imageID;
 	var voteD = req.params.voteDirection;
+	// if(voteD == 'up'){
+	// 	voteD = 1;
+	// }else{
+	// 	voteD = -1;
+	// }
 	var insertVoteQuery = "INSERT INTO votes (ip, imageId, voteDirection) VALUES ('"+req.ip+"',"+imageID+",'"+voteD+"')"
-	res.send(insertVoteQuery);
+	// res.send(insertVoteQuery);
+	connection.query(insertVoteQuery, (error, results, fields)=>{
+		if (error) throw error;
+		res.redirect('/?vote=success');
+	})
 });
 
 router.get('/standings', function(req, res, next) {
