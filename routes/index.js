@@ -18,16 +18,24 @@ connection.connect();
 /* GET home page. */
 router.get('/', function(req, res, next) {
 	var getImagesQuery = "SELECT * FROM images";
+
+	getImagesQuery = "SELECT * FROM images WHERE id NOT IN" +
+		"(SELECT imageID FROM votes WHERE ip = '"+req.ip+"');"
+
 	connection.query(getImagesQuery, (error, results, fields)=>{
 		// res.json(results);
 		// grab a random image from the results
 		var randomIndex = (Math.floor(Math.random() * results.length));
 		// res.json(results[randomIndex]);
-		res.render('index', { 
-			title: 'Rate the Cars',
-			imageToRender: '/images/'+results[randomIndex].imageUrl,
-			imageID: results[randomIndex].id
-		});		
+		if(results.length === 0){
+			res.render('index', { title: 'Rate the cars', msg: "noImages" } );
+		}else{
+			res.render('index', { 
+				title: 'Rate the Cars',
+				imageToRender: '/images/'+results[randomIndex].imageUrl,
+				imageID: results[randomIndex].id
+			});		
+		}
 	})
 });
 
