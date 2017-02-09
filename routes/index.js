@@ -43,11 +43,11 @@ router.get('/vote/:voteDirection/:imageID', (req, res, next)=>{
 	// res.json(req.params.imageID);
 	var imageID = req.params.imageID;
 	var voteD = req.params.voteDirection;
-	// if(voteD == 'up'){
-	// 	voteD = 1;
-	// }else{
-	// 	voteD = -1;
-	// }
+	if(voteD == 'up'){
+		voteD = 1;
+	}else{
+		voteD = -1;
+	}
 	var insertVoteQuery = "INSERT INTO votes (ip, imageId, voteDirection) VALUES ('"+req.ip+"',"+imageID+",'"+voteD+"')"
 	// res.send(insertVoteQuery);
 	connection.query(insertVoteQuery, (error, results, fields)=>{
@@ -58,6 +58,24 @@ router.get('/vote/:voteDirection/:imageID', (req, res, next)=>{
 
 router.get('/standings', function(req, res, next) {
   res.render('standings', { title: 'Standings' });
+});
+
+router.get('/testQ', (req, res, next)=>{
+	// var id1 = 1;
+	// var id2 = 3;
+	// var query = "SELECT * FROM images WHERE id > ? AND id < ?";
+	// connection.query(query, [id1, id2], (error, results, fields)=>{
+	// 	res.json(results);
+	// })
+	var imageIdVoted = 3;
+	var voteDirection = 'cool';
+	var insertQuery = "INSERT INTO votes (ip, imageId, voteDirection) VALUES (?,?,?)"
+	connection.query(insertQuery, [req.ip, imageIdVoted, voteDirection], (error, results, fields)=>{
+		var query = "SELECT * FROM votes";
+		connection.query(query, (error, results, fields)=>{
+			res.json(results);
+		});
+	})
 });
 
 module.exports = router;
