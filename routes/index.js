@@ -11,9 +11,17 @@ var connection = mysql.createConnection({
 	password: config.password,
 	database: config.database
 });
-
 // After this line runs, we will have a valid connectino to MySQL
 connection.connect();
+
+// Include Multer module
+var multer = require('multer');
+// Upload is teh multer module with a dest object passed to it
+var upload = multer({dest: 'public/images'})
+// Specify the type for use later, it comes from upload.
+var type = upload.single('imageToUpload');
+// We will need fs to read the file, it's part of core
+var fs = require('fs');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -69,13 +77,37 @@ router.get('/testQ', (req, res, next)=>{
 	// })
 	var imageIdVoted = 3;
 	var voteDirection = 'cool';
-	var insertQuery = "INSERT INTO votes (ip, imageId, voteDirection) VALUES (?,?,?)"
+	var insertQuery = "INSERT INTO votes (ip, imageId, voteDirection) VALUES (?,?,)"
 	connection.query(insertQuery, [req.ip, imageIdVoted, voteDirection], (error, results, fields)=>{
 		var query = "SELECT * FROM votes";
 		connection.query(query, (error, results, fields)=>{
 			res.json(results);
 		});
 	})
+});
+
+router.get('/uploadImage', (req, res, next)=>{
+	res.render('uploadImage', {});
+});
+
+router.post('/formSubmit', type, (req, res, next)=>{
+	// Save the path where teh file is at temporarily
+	var tmpPath = req.file.path;
+	// Set up the target path + the orig name ofthe file
+	var targetPath = 'public/images/'+req.file.originalname;
+	// use fs module to read the file then write it to the correct place
+	fs.readFile(tmpPath, (error, fileContents)=>{
+		fs.writeFile(targetPath, fileContents, (error)=>{
+			if (error) throw error;
+			var insertQuery = "INSERT INTO images (imageUrl) VALUE (?)";
+			connection.query(insertQuery, [req.file.originalname], (dberror, results, fields)=>{
+				if (dberror) throw dberror;
+				res.redirect('/?file="uploaded');
+			})
+			
+		})
+	})
+	// res.json(req.file);
 });
 
 module.exports = router;
